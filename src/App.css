@@ -5,11 +5,6 @@
   text-align: center;
 }
 
-.App-link {
-  color: #61dafb;
-}
-
-
 .App-header {
   background-color: #282c34;
   min-height: 10vh;
@@ -22,6 +17,7 @@
   color: white;
   box-shadow: -15px 15px 20px black;
 }
+
 #background {
   position: absolute;
   z-index: -1;
@@ -41,19 +37,50 @@
 }
 
 .btbar{
-  margin: 10px;
+  margin-top: 10px;
   min-width: 80vw;
   background-color:rgb(255, 255, 255);
+  display: flex;
   border-radius: 50px;
   padding: 0px 2vw 0px 2vw;
   width:fit-content;
-  display: flex;
-  justify-content:stretch;
   box-shadow: -15px 15px 20px black;
 }
-
 .btbar > div{
-  width:inherit;
-  font-size: 8vh;
+  font-size: 6vh;
   background-color: white;
+  flex-grow: 1;
+  border: 2px solid rgba(0, 0, 0 ,.6);
+}
+
+.btn{
+  padding: .3rem;
+  cursor: pointer;
+  border: 0;
+  border-style: groove;
+  text-align: center;
+  user-select: none;
+}
+
+.btn:hover{
+  background-color: rgb(214, 214, 213);
+}
+
+.btn.on{
+  border: 3px solid black;
+  border-bottom: 0;
+}
+
+.showPanel{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.panel{
+  padding-top: 10px;
+  background-color:rgb(255, 255, 255);
+  min-width: 80vw;
+  font-size: 2.4rem;
+  min-height: 30vh;
 }
