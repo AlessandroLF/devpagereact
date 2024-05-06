@@ -8,7 +8,7 @@
 .App-header {
   background-color: #282c34;
   min-height: 10vh;
-  min-width: 100vw;
+  width: stretch;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -19,9 +19,11 @@
 }
 
 #background {
+  padding-top: 10vh;
+  width: stretch;
   position: absolute;
   z-index: -1;
-  font-size: 15vh;
+  font-size: calc(60px + 2vmin);
   text-align: justify;
   color: transparent;
   text-shadow: 10px 0px 15px rgba(0, 0, 0 ,1);
@@ -31,7 +33,7 @@
 }
 
 #perfil{
-  max-height: 60vh;
+  max-height: calc(10px + 50vmin);
   margin-top: 10px;
   box-shadow: -15px 15px 20px black;
 }
@@ -47,7 +49,7 @@
   box-shadow: -15px 15px 20px black;
 }
 .btbar > div{
-  font-size: 6vh;
+  font-size: calc(10px + 2vmin);
   background-color: white;
   flex-grow: 1;
   border: 2px solid rgba(0, 0, 0 ,.6);
@@ -81,6 +83,6 @@
   padding-top: 10px;
   background-color:rgb(255, 255, 255);
   min-width: 80vw;
-  font-size: 2.4rem;
+  font-size: calc(10px + 2vmin);
   min-height: 30vh;
 }
