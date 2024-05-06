@@ -56,7 +56,7 @@
 }
 
 .btn > img{
-  max-width: calc(25px + 1vmin);
+  max-height: calc(25px + 1vmin);
 }
 
 .btn{
