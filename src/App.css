@@ -55,8 +55,12 @@
   border: 2px solid rgba(0, 0, 0 ,.6);
 }
 
+.btn > img{
+  max-width: calc(25px + 1vmin);
+}
+
 .btn{
-  padding: .3rem;
+  padding-top: .3rem;
   cursor: pointer;
   border: 0;
   border-style: groove;

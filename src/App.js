@@ -2,6 +2,7 @@ import { useState } from 'react';
 import './App.css';
 import ppic from './prechochi.jpg';
 import {Experience, Git, Animations, Info} from './components/basePanels'
+import plogo from './prgramIcon.png';
 
 function App() {
 
@@ -43,10 +44,10 @@ function App() {
       <div className='showPanel'>
         <img id='perfil' alt='err' src={ppic} />
         <div className='btbar'>
-          <div className={active.xp ? 'btn on' : 'btn'} id='xp' onClick={onClick} >XP</div>
+          <div className={active.xp ? 'btn on' : 'btn'} id='xp' onClick={onClick} ><img src={plogo} alt='Programing Languages' onClick={(event)=>{event.stopPropagation();event.target.parentElement.click()}}/></div>
           <div className={active.gt ? 'btn on' : 'btn'} id='gt' onClick={onClick} >GT</div>
-          <div className={active.io ? 'btn on' : 'btn'} id='io' onClick={onClick} >IO</div>
           <div className={active.an ? 'btn on' : 'btn'} id='an' onClick={onClick} >AN</div>
+          <div className={active.io ? 'btn on' : 'btn'} id='io' onClick={onClick} >IO</div>
         </div>
         {pannel}
       </div>
