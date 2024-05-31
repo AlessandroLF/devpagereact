@@ -89,4 +89,33 @@
   min-width: 80vw;
   font-size: calc(10px + 2vmin);
   min-height: 30vh;
+  display: flex;
+}
+
+.card{
+  display: flex;
+  flex: 1 1 32vw;
+  max-width: 35vw;
+  margin: 5vw;
+  height: 15vw;
+  border: 1px solid blue;
+}
+
+.card > div {
+  flex-grow: 1;
+  padding-top: 5px;
+  align-content: center;
+}
+
+.iconGroup{
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content:center;
+  align-content:space-evenly;
+}
+
+.iconGroup > img {
+  max-width: 5vw;
+  margin: 5px;
 }

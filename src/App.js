@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import './App.css';
-import ppic from './prechochi.jpg';
+import ppic from './ProfPic.png';
 import {Experience, Git, Animations, Info} from './components/basePanels'
 import plogo from './prgramIcon.png';
 import glogo from './Git-Icon-Black.png';
-import ilogo from './iLogo.jpg'
+import ilogo from './iLogo.png'
 
 function App() {
 
@@ -32,6 +32,7 @@ function App() {
           break;
         case 'io': setPannel(<Info />);
           break;
+        default: console.log("Error al elegir panel: " + name);
       }
       else
         setPannel(<></>);
