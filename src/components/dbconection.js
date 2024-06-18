@@ -28,8 +28,14 @@ export const SignUp = ()=>{
                 'public': data.public
             }
 
-            const respuesta = await fetch('https://devpage-ojxi.onrender.com/signUp', {
+            const url= 'https://devpage-ojxi.onrender.com/signUp';
+            const urlT= 'http://localhost:5000/signUp';
+
+            const respuesta = await fetch(url, {
                 method: "POST",
+                headers: {
+                    'Content-Type': 'application/json'
+                },
                 body: JSON.stringify(cargaUtil)
             });
             let res = await respuesta.json();
