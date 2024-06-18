@@ -20,7 +20,7 @@
 
 #background {
   padding-top: 10vh;
-  width: stretch;
+  width: 200%;
   position: absolute;
   z-index: -1;
   font-size: calc(40px + 2vmin);
@@ -31,9 +31,10 @@
   user-select: none;
   background-color: rgba(0, 0, 0 ,.2);
   display: inline-block;
-  transform: scale(1,3);
+  transform: scale(.5,3);
   transform-origin: left;
   transform-origin: top;
+  overflow:hidden;
 }
 
 #perfil{
@@ -112,6 +113,8 @@ tr .btn:hover{
   flex-grow: 1;
   justify-content: center;
   box-shadow: -15px 15px 20px black;
+  padding-bottom: 5vh;
+  margin-bottom: 5vh;
 }
 
 .card{
@@ -217,6 +220,11 @@ form tr{
   flex-direction: row-reverse;
 }
 
+form .btn{
+  border: groove;
+  border-color: transparent;
+}
+
 input{
   font-size: calc(10px + 2vmin);;
   border-style: groove;
@@ -224,6 +232,11 @@ input{
   margin: .1rem;
   padding: .2rem;
   height: fit-content;
+}
+
+input[type='checkbox']{
+  transform: scale(2, 2);
+  margin-right: 10px;
 }
 
 td img{
@@ -234,6 +247,11 @@ td img{
 
 .card.w.off div.content{
   display: none;
+}
+
+.card.w div.header{
+  border: groove;
+  border-color: transparent;
 }
 
 .card.w.off div.header:hover{
@@ -248,6 +266,11 @@ td img{
   background-color: rgba(185, 127, 104, 0.5);
 }
 
+.card.w label{
+  display: flex;
+  align-items: flex-end;
+}
+
 .card.w div{
   user-select: none;
   width: 100%;
@@ -257,6 +280,7 @@ td img{
 
 .card.w{
   flex: 1 1 60vw;
+  max-width: 70vw;
   min-height: 10px;
   flex-direction: column;
 }

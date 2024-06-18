@@ -1,5 +1,6 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import glogo from '../Git-Icon-Black.png';
+import { SignUp } from './dbconection';
 
 export const Experience = ()=>{
 
@@ -98,28 +99,7 @@ export const Bd = ()=>{
                 </form>
             </div>
             <div className='card'>
-            <form>
-                    <h3>Sign Up</h3>
-                    <tr>
-                        <input required placeholder='Name' type="text" id="nombre" name="name" />
-                        <label>Name: </label>
-                    </tr>
-                    <tr>
-                        <input required placeholder='Password' type="password" id="pass" name="pass" />
-                        <label>Password: </label>
-                    </tr>
-                    <tr>
-                        <input required placeholder='Password' type="password" id="pass2" name="pass2" />
-                        <label>Cofirm password: </label>
-                    </tr>
-                    <tr>
-                        <input placeholder='Optional' type="email" id="email" name="email" />
-                        <label>E-mail: </label>
-                    </tr>
-                    <tr>
-                        <div className='btn' >Sign Up</div>
-                    </tr>
-                </form>
+                <SignUp />
             </div>
         </div>
     );
@@ -132,10 +112,6 @@ export const Animations = ()=>(
 export const Info = ()=>{
 
     const [modal, setModal] = useState(false);
-
-    const onCVClick = ()=>{
-        setModal(!modal);
-    }
 
     const onModalClick = ()=>{
         setModal(!modal);
@@ -163,7 +139,7 @@ export const Info = ()=>{
                 </tr>
                 <tr>
                     <td><img src='https://cdn-icons-png.flaticon.com/512/3135/3135686.png' alt='Curriculum Vitae' /></td>
-                    <td><div className='btn' onClick={onCVClick} >CV_Alessandro_Lombardo</div></td>
+                    <td><div className='btn' onClick={onModalClick} >CV_Alessandro_Lombardo</div></td>
                 </tr>
             </table>
         </div>
