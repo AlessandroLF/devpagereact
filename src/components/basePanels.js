@@ -1,4 +1,5 @@
-//import { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
+import glogo from '../Git-Icon-Black.png';
 
 export const Experience = ()=>{
 
@@ -59,16 +60,112 @@ export const Experience = ()=>{
     </div>)
 };
 
-export const Git = ()=>(
-    <div className='panel v' >
-        <a href="https://github.com/AlessandroLF">https://github.com/AlessandroLF</a>
-    </div>
-);
+export const Bd = ()=>{
+
+    const oncSearchClick = (event)=>{
+        event.target.parentElement.classList.toggle('off');
+    }
+
+    const secClick = (event)=>{
+        event.target.parentElement.click();
+    }
+
+    return(
+        <div className='panel' >
+            <div className='card w off' >
+                <div className='header' onClick={oncSearchClick}>
+                    <img src="https://cdn-icons-png.flaticon.com/512/6703/6703157.png" alt='Search' onClick={secClick} />
+                    <label onClick={secClick} >____</label>
+                </div>
+                <div className='content'>
+                    <h1>DB Querry here</h1>
+                </div>
+            </div>
+            <div className='card'>
+                <form>
+                    <h3>Log In</h3>
+                    <tr>
+                        <input required placeholder='Name' type="text" id="nombre" name="name" />
+                        <label>Name: </label>
+                    </tr>
+                    <tr>
+                        <input required placeholder='Password' type="password" id="pass" name="pass" />
+                        <label>Password: </label>
+                    </tr>
+                    <tr>
+                        <div className='btn' >Log In</div>
+                    </tr>
+                </form>
+            </div>
+            <div className='card'>
+            <form>
+                    <h3>Sign Up</h3>
+                    <tr>
+                        <input required placeholder='Name' type="text" id="nombre" name="name" />
+                        <label>Name: </label>
+                    </tr>
+                    <tr>
+                        <input required placeholder='Password' type="password" id="pass" name="pass" />
+                        <label>Password: </label>
+                    </tr>
+                    <tr>
+                        <input required placeholder='Password' type="password" id="pass2" name="pass2" />
+                        <label>Cofirm password: </label>
+                    </tr>
+                    <tr>
+                        <input placeholder='Optional' type="email" id="email" name="email" />
+                        <label>E-mail: </label>
+                    </tr>
+                    <tr>
+                        <div className='btn' >Sign Up</div>
+                    </tr>
+                </form>
+            </div>
+        </div>
+    );
+}
 
 export const Animations = ()=>(
     <div className='panel' >Pretty</div>
 );
 
-export const Info = ()=>(
-    <div className='panel' >Hey</div>
-);
+export const Info = ()=>{
+
+    const [modal, setModal] = useState(false);
+
+    const onCVClick = ()=>{
+        setModal(!modal);
+    }
+
+    const onModalClick = ()=>{
+        setModal(!modal);
+    }
+
+    return (
+        <div className='panel v' >
+            {modal && <div className='modal' onClick={onModalClick} >
+                    <embed src='https://devpage-ojxi.onrender.com/CV_Alessandro_Lombardo_EN.pdf' type='application/pdf' />
+                    <div className='btn close'>X</div>
+                </div>
+            }
+            <table>
+                <tr>
+                    <td><img src='https://cdn-icons-png.flaticon.com/512/2165/2165061.png' alt='E-mail' /></td>
+                    <td>lombardoalessandro25@hotmail.com</td>
+                </tr>
+                <tr>
+                    <td><img src={glogo} alt='GitHub' /></td>
+                    <td><a href="https://github.com/AlessandroLF" target="_blank" >https://github.com/AlessandroLF</a></td>
+                </tr>
+                <tr>
+                    <td><img src='https://cdn-icons-png.flaticon.com/512/6067/6067468.png' alt='Phone' /></td>
+                    <td>+52 5514994341</td>
+                </tr>
+                <tr>
+                    <td><img src='https://cdn-icons-png.flaticon.com/512/3135/3135686.png' alt='Curriculum Vitae' /></td>
+                    <td><div className='btn' onClick={onCVClick} >CV_Alessandro_Lombardo</div></td>
+                </tr>
+            </table>
+        </div>
+    )
+};

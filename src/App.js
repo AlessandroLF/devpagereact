@@ -1,9 +1,8 @@
 import { useState } from 'react';
 import './App.css';
 import ppic from './ProfPic.png';
-import {Experience, Git, Animations, Info} from './components/basePanels'
+import {Experience, Bd, Animations, Info} from './components/basePanels'
 import plogo from './prgramIcon.png';
-import glogo from './Git-Icon-Black.png';
 import ilogo from './iLogo.png'
 
 function App() {
@@ -11,7 +10,7 @@ function App() {
   const [pannel, setPannel] = useState(<></>);
   const [active, setActive] = useState({
     xp: false,
-    gt: false,
+    bd: false,
     an: false,
     io: false
   });
@@ -26,7 +25,7 @@ function App() {
       switch(name){
         case 'xp': setPannel(<Experience />);
           break;
-        case 'gt': setPannel(<Git />);
+        case 'bd': setPannel(<Bd />);
           break;
         case 'an': setPannel(<Animations />);
           break;
@@ -53,8 +52,9 @@ function App() {
         <img id='perfil' alt='err' src={ppic} />
         <div className='btbar'>
           <div className={active.xp ? 'btn on' : 'btn'} id='xp' onClick={onClick} ><img src={plogo} alt='Programing Languages' onClick={onImgClick}/></div>
-          <div className={active.gt ? 'btn on' : 'btn'} id='gt' onClick={onClick} ><img src={glogo} alt='Git' onClick={onImgClick}/></div>
-          <div className={active.an ? 'btn on' : 'btn'} id='an' onClick={onClick} ><img src='https://media.tenor.com/EJQvxUMk__MAAAAi/runner.gif' alt='Animations' onClick={onImgClick}/></div>
+          <div className={active.bd ? 'btn on' : 'btn'} id='bd' onClick={onClick} ><img src='https://cdn-icons-png.flaticon.com/512/15156/15156593.png' alt='Git' onClick={onImgClick}/></div>
+          {/*<div className={active.an ? 'btn on' : 'btn'} id='an' onClick={onClick} ><img src='https://media.tenor.com/EJQvxUMk__MAAAAi/runner.gif' alt='Animations' onClick={onImgClick}/></div>*/}
+          <div className={active.an ? 'btn on' : 'btn'} id='an' onClick={onClick} ><img src='https://cdn-icons-png.flaticon.com/512/7187/7187174.png' alt='Animations' onClick={onImgClick}/></div>
           <div className={active.io ? 'btn on' : 'btn'} id='io' onClick={onClick} ><img src={ilogo} alt='Info' onClick={onImgClick}/></div>
         </div>
         {pannel}
