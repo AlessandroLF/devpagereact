@@ -76,7 +76,7 @@ export const LogIn = (props)=>{
     const Submit = async(event)=>{
         event.preventDefault();
         props.modal(true);
-        /*const form = event.target;
+        const form = event.target;
         var cargaUtil = {
             "name" : form[0],
             "password": form[1]
@@ -91,8 +91,8 @@ export const LogIn = (props)=>{
             body: JSON.stringify(cargaUtil)
         });
         let res = await respuesta.json();
+        props.modal(false);
         alert(JSON.stringify(res));
-        */
     }
 
     return(
