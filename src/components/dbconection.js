@@ -78,21 +78,24 @@ export const LogIn = (props)=>{
         props.modal(true);
         const form = event.target;
         var cargaUtil = {
-            "name" : form[0].value,
-            "password": form[1].value
+            'name' : form[0].value,
+            'password': form[1].value
         }
-
-        const url= 'https://devpage-ojxi.onrender.com/logIn';
-        const respuesta = await fetch(url, {
-            method: "POST",
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(cargaUtil)
-        });
-        let res = await respuesta.json();
+        try{
+            const url= 'https://devpage-ojxi.onrender.com/logIn';
+            const respuesta = await fetch(url, {
+                method: "POST",
+                body: JSON.stringify(cargaUtil)
+            });
+            const res = await respuesta.json();
+            if(!res.err)
+                alert(JSON.stringify(res));
+            else
+                alert('Error: ' + res.err);
+        }catch(e){
+            console.log(e);
+        }
         props.modal(false);
-        alert(JSON.stringify(res));
     }
 
     return(
