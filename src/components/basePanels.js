@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import glogo from '../Git-Icon-Black.png';
-import { SignUp } from './dbconection';
+import { SignUp, LogIn } from './dbconection';
 
 export const Experience = ()=>{
 
@@ -83,20 +83,7 @@ export const Bd = ()=>{
                 </div>
             </div>
             <div className='card'>
-                <form>
-                    <h3>Log In</h3>
-                    <tr>
-                        <input required placeholder='Name' type="text" id="nombre" name="name" />
-                        <label>Name: </label>
-                    </tr>
-                    <tr>
-                        <input required placeholder='Password' type="password" id="pass" name="pass" />
-                        <label>Password: </label>
-                    </tr>
-                    <tr>
-                        <div className='btn' >Log In</div>
-                    </tr>
-                </form>
+                <LogIn />
             </div>
             <div className='card'>
                 <SignUp />
