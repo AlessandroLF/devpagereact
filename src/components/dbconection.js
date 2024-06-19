@@ -51,7 +51,7 @@ export const SignUp = ()=>{
             <label>E-mail: </label>
         </tr>
         <tr>
-            <input type="checkbox" name="public" checked />
+            <input type="checkbox" name="public" />
             <label>Make public: </label>
         </tr>
         <tr>
@@ -79,12 +79,7 @@ export const LogIn = ()=>{
             body: JSON.stringify(cargaUtil)
         });
         let res = await respuesta.json();
-        if(res){
-            alert(JSON.stringify(res));
-        }
-        else{
-            alert("Error");
-        }
+        alert(JSON.stringify(res));
     }
 
     return(
