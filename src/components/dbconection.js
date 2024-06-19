@@ -5,11 +5,11 @@ export const SignUp = ()=>{
         const form = event.target;
         if(form[1].value === form[2].value){
             var cargaUtil = {
-                "name" : form[0],
-                "password": form[1],
+                'name' : form[0],
+                'password': form[1],
                 'email': form[3],
                 'public': form[4]
-            }
+            };
 
             const url= 'https://devpage-ojxi.onrender.com/signUp';
 
@@ -20,7 +20,8 @@ export const SignUp = ()=>{
                 },
                 body: JSON.stringify(cargaUtil)
             });
-            let res = await respuesta.json();
+            const res = await respuesta.json();
+            console.log(res);
             if(res){
                 alert(JSON.stringify(res));
             }
@@ -28,22 +29,22 @@ export const SignUp = ()=>{
                 alert("Error");
             }
         }else
-            alert('The passwords do not coincide');
+            alert('The passwords do not match');
     }
 
     return(
     <form onSubmit={Submit}>
         <h3>Sign Up</h3>
         <tr>
-            <input required placeholder='Name' type="text" id="nombre" name="name" />
+            <input required placeholder='Name' type="text" name="name" />
             <label>Name: </label>
         </tr>
         <tr>
-            <input required placeholder='Password' type="password" id="pass" name="password" />
+            <input required placeholder='Password' type="password" name="password" />
             <label>Password: </label>
         </tr>
         <tr>
-            <input required placeholder='Password' type="password" id="pass2" name="password2" />
+            <input required placeholder='Password' type="password" name="password2" />
             <label>Cofirm password: </label>
         </tr>
         <tr>
@@ -86,7 +87,7 @@ export const LogIn = ()=>{
         <form onSubmit={Submit}>
             <h3>Log In</h3>
             <tr>
-                <input required placeholder='Name' type="text" id="nombre" name="name" />
+                <input required placeholder='Name' type="text" name="name" />
                 <label>Name: </label>
             </tr>
             <tr>
