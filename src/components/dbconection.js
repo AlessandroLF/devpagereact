@@ -5,23 +5,22 @@ export const SignUp = ()=>{
         const form = event.target;
         if(form[1].value === form[2].value){
             var cargaUtil = {
-                'name' : form[0],
-                'password': form[1],
-                'email': form[3],
-                'public': form[4]
+                'name' : form[0].value,
+                'password': form[1].value,
+                'email': form[3].value,
+                'public': form[4].value
             };
 
             const url= 'https://devpage-ojxi.onrender.com/signUp';
 
+            console.log(JSON.stringify(cargaUtil));
+
             const respuesta = await fetch(url, {
                 method: "POST",
-                headers: {
-                    'Content-Type': 'application/json'
-                },
                 body: JSON.stringify(cargaUtil)
             });
             const res = await respuesta.json();
-            console.log(res);
+            console.log(JSON.stringify(res));
             if(res){
                 alert(JSON.stringify(res));
             }
