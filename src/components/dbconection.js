@@ -78,8 +78,8 @@ export const LogIn = (props)=>{
         props.modal(true);
         const form = event.target;
         var cargaUtil = {
-            "name" : form[0],
-            "password": form[1]
+            "name" : form[0].value,
+            "password": form[1].value
         }
 
         const url= 'https://devpage-ojxi.onrender.com/logIn';
