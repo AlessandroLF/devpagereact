@@ -63,6 +63,8 @@ export const Experience = ()=>{
 
 export const Bd = ()=>{
 
+    const [waitModal, setWaitModal] = useState(false);
+
     const oncSearchClick = (event)=>{
         event.target.parentElement.classList.toggle('off');
     }
@@ -83,10 +85,12 @@ export const Bd = ()=>{
                 </div>
             </div>
             <div className='card'>
-                <LogIn />
+                {waitModal && <div className='modal wait' />}
+                <LogIn modal={setWaitModal} />
             </div>
             <div className='card'>
-                <SignUp />
+                {waitModal && <div className='modal wait' />}
+                <SignUp modal={setWaitModal} />
             </div>
         </div>
     );
