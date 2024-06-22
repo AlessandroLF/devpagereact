@@ -22,16 +22,11 @@ export const SignUp = (props)=>{
             });
             const res = await respuesta.json();
             if(!res.err){
-                if (res.rowCount){
-                    alert('Success!');
-                }
+                alert('Success!');
                 props.modal(false);
             }
             else{
-                const detail = res.err.detail;
-                const key = detail.split('(')[1].split(')')[0];
-                const val = detail.split('(')[2].split(')')[0];
-                alert(key + ': ' + val + ' is already registred, plase choose another one');
+                alert(res.err.key + ': ' + res.err.val + ' is already registred, plase choose another one');
                 props.modal(false);
             }
         }else{
