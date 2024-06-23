@@ -175,8 +175,6 @@ tr .btn:hover{
   display: none;
 }
 
-
-
 .panel.v {
   flex-direction: column;
   align-items: center;
@@ -198,23 +196,32 @@ tr .btn:hover{
   width: 90%;
 }
 
+.btn.close:hover{
+  color: rgb(0, 0, 0);
+  background-color: rgb(45, 42, 236);
+}
+
 .btn.close{
   user-select: none;
-  position: fixed;
-  top:10vh;
-  right: 10vw;
+  position: absolute;
   border-radius: 15px;
-  width: 45px;
-  height: 45px;
-  color: white;
   display: flex;
   justify-content: center;
   align-content: center;
   align-items: center;
+  color: white;
   background-color: red;
   padding: 0;
   margin: 0;
   justify-content: center;
+  max-width: fit-content;
+}
+
+.modal .btn.close{
+  top:10vh;
+  right: 10vw;
+  width: 45px;
+  height: 45px;
 }
 
 form tr{
@@ -310,8 +317,9 @@ td img{
   cursor: wait;
 }
 
-div.db{
+.card.w div.db{
   overflow-x: auto;
+  justify-content: center;
 }
 
 .db table{
@@ -349,7 +357,6 @@ div.db{
 thead{
   background-color: rgba(0, 0, 0 ,.3);
 }
-
 
 @media (min-width: 1200px){
   .card{

@@ -1,8 +1,6 @@
 import { useState, useEffect } from "react";
 
-const SignUp = ({setLoggedIn})=>{
-        
-    const [waitModal, setWaitModal] = useState(false);
+const SignUp = ({setLoggedIn, setWaitModal})=>{
 
     const Submit = async(event)=>{
         event.preventDefault();
@@ -43,7 +41,6 @@ const SignUp = ({setLoggedIn})=>{
 
     return(
         <form onSubmit={Submit}>
-            {waitModal && <div className='modal wait' />}
             <h3>Sign Up</h3>
             <table>
                 <tr>
@@ -74,9 +71,7 @@ const SignUp = ({setLoggedIn})=>{
     )
 ;}
 
-const LogIn = ({setLoggedIn})=>{
-
-    const [waitModal, setWaitModal] = useState(false);
+const LogIn = ({setLoggedIn, setWaitModal})=>{
 
     const Submit = async(event)=>{
         event.preventDefault();
@@ -105,7 +100,6 @@ const LogIn = ({setLoggedIn})=>{
 
     return(
         <form onSubmit={Submit}>
-            {waitModal && <div className='modal wait' />}
             <h3>Log In</h3>
                 <table>
                 <tr>
@@ -124,25 +118,33 @@ const LogIn = ({setLoggedIn})=>{
     );
 }
 
-const Upload = ()=>{
+const Upload = ({setLoggedIn})=>{
+
+    const onSubmit = ()=>{
+        setLoggedIn(false);
+    }
+
     return(
         <div className='card w' >
-
+            <div className='btn close' onClick={onSubmit} >LogOut</div>
         </div>
     );
 }
 
 export const SessionPanel = ()=>{
-
+        
+    const [waitModal, setWaitModal] = useState(false);
     const [loggedIn, setLoggedIn] = useState(false);
 
     return(<>
-        {loggedIn ? <Upload /> : <>
+        {loggedIn ? <Upload setLoggedIn={setLoggedIn} /> : <>
             <div className='card' >
-                <LogIn setLoggedIn={setLoggedIn} />
+                {waitModal && <div className='modal wait' ><img src="https://cdn.pixabay.com/animation/2023/10/08/03/19/03-19-26-213_512.gif" alt="Loading..." /></div>}
+                <LogIn setLoggedIn={setLoggedIn} setWaitModal={setWaitModal} />
             </div>
             <div className='card' >
-                <SignUp setLoggedIn={setLoggedIn} />
+                {waitModal && <div className='modal wait' ><img src="https://cdn.pixabay.com/animation/2023/10/08/03/19/03-19-26-213_512.gif" alt="Loading..." /></div>}
+                <SignUp setLoggedIn={setLoggedIn} setWaitModal={setWaitModal} />
             </div>
         </>}
     </>)
@@ -150,8 +152,10 @@ export const SessionPanel = ()=>{
 
 export const QuerryPanel = ()=>{
 
+    const [waitModal, setWaitModal] = useState(false);
     const [rows, setRows] = useState([]);
-    const [cols, setCols] = useState(['id','name', 'email'])
+    const [cols, setCols] = useState(['id','name', 'email', 'date']);
+
 
     const querry = async()=>{
         const cargaUtil = {
@@ -188,6 +192,7 @@ export const QuerryPanel = ()=>{
             </tr>
             </thead>
             <tbody>
+                {waitModal && <div className='modal wait' ><img src="https://cdn.pixabay.com/animation/2023/10/08/03/19/03-19-26-213_512.gif" alt="Loading..." /></div>}
                 {rows.map((row)=>(
                     <tr>
                         {cols.map((col)=>(
