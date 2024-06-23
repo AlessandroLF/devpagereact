@@ -154,9 +154,7 @@ export const QuerryPanel = ()=>{
 
     const querry = async()=>{
         const cargaUtil = {
-            cols: ['name', 'email'],
-            condition: 'name',
-            value: '*'
+            cols: ['name', 'email']
         }
         try{
             const url= 'https://devpage-ojxi.onrender.com/get';
