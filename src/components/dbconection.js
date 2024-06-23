@@ -150,7 +150,7 @@ export const SessionPanel = ()=>{
 
 export const QuerryPanel = ()=>{
 
-    const [rows, setRows] = useState({});
+    const [rows, setRows] = useState([]);
 
     const querry = async()=>{
         const cargaUtil = {
@@ -179,7 +179,12 @@ export const QuerryPanel = ()=>{
     return(<table>
         <thead>Search the database</thead>
         <tbody>
-            {}
+            {rows.map((row)=>{
+                <tr>
+                    <td>row.name</td>
+                    <td>row.email</td>
+                </tr>
+            })}
         </tbody>
     </table>);
 }
