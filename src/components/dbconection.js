@@ -151,10 +151,11 @@ export const SessionPanel = ()=>{
 export const QuerryPanel = ()=>{
 
     const [rows, setRows] = useState([]);
+    const [cols, setCols] = useState(['id','name', 'email'])
 
     const querry = async()=>{
         const cargaUtil = {
-            cols: ['name', 'email']
+            cols: cols
         }
         try{
             const url= 'https://devpage-ojxi.onrender.com/get';
@@ -163,9 +164,10 @@ export const QuerryPanel = ()=>{
                 body: JSON.stringify(cargaUtil)
             });
             const res = await respuesta.json();
-            if(!res.err)
+            if(!res.err){
+                console.log(res);
                 setRows(res.rows);
-            else
+            }else
                 alert('Error: ' + res.err);
         }catch(e){
             console.log(e);
@@ -176,15 +178,24 @@ export const QuerryPanel = ()=>{
         querry();
     }, [])
 
-    return(<table>
-        <thead>Search the database</thead>
-        <tbody>
-            {rows.map((row)=>{
-                <tr>
-                    <td>row.name</td>
-                    <td>row.email</td>
-                </tr>
-            })}
-        </tbody>
-    </table>);
+    return(<div className='db' >
+        <table>
+            <thead>
+            <tr>
+                {cols.map((col)=>(
+                    <td>{col}</td>
+                ))}
+            </tr>
+            </thead>
+            <tbody>
+                {rows.map((row)=>(
+                    <tr>
+                        {cols.map((col)=>(
+                            <td>{row[col]}</td>
+                        ))}
+                    </tr>
+                ))}
+            </tbody>
+        </table>
+    </div>);
 }
