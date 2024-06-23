@@ -1,76 +1,86 @@
+import { useState, useEffect } from "react";
 
-
-export const SignUp = (props)=>{
+const SignUp = ({setLoggedIn})=>{
+        
+    const [waitModal, setWaitModal] = useState(false);
 
     const Submit = async(event)=>{
         event.preventDefault();
-        props.modal(true);
+        setWaitModal(true);
         const form = event.target;
-        if(form[1].value === form[2].value){
-            var cargaUtil = {
-                'name' : form[0].value,
-                'password': form[1].value,
-                'email': form[3].value,
-                'public': form[4].checked
-            };
+        if(form[1].value.length > 5){
+            if(form[1].value === form[2].value){
 
-            const url= 'https://devpage-ojxi.onrender.com/signUp';
-
-            const respuesta = await fetch(url, {
-                method: "POST",
-                body: JSON.stringify(cargaUtil)
-            });
-            const res = await respuesta.json();
-            if(!res.err){
-                alert('Success!');
-                props.modal(false);
-            }
-            else{
-                alert(res.err.key + ': ' + res.err.val + ' is already registred, plase choose another one');
-                props.modal(false);
+                var cargaUtil = {
+                    'name' : form[0].value,
+                    'password': form[1].value,
+                    'email': form[3].value,
+                    'public': form[4].checked
+                };
+                const url= 'https://devpage-ojxi.onrender.com/signUp';
+    
+                const respuesta = await fetch(url, {
+                    method: "POST",
+                    body: JSON.stringify(cargaUtil)
+                });
+                const res = await respuesta.json();
+                if(!res.err){
+                    alert('Success!');
+                    setLoggedIn(true);
+                }
+                else{
+                    alert(res.key + ': ' + res.val + ' is already registred, plase choose another one');
+                }
+            }else{
+                alert('The passwords do not match');
             }
         }else{
-            alert('The passwords do not match');
-            props.modal(true);
+            alert('Password must be at least 6 characters');
         }
+
+        setWaitModal(false);
     }
 
-    return(<>
-    <form onSubmit={Submit}>
-        <h3>Sign Up</h3>
-        <table>
-            <tr>
-                <td><input required placeholder='Name' type="text" name="name" /></td>
-                <td><label>Name: </label></td>
-            </tr>
-            <tr>
-                <td><input required placeholder='Password' type="password" name="password" /></td>
-                <td><label>Password: </label></td>
-            </tr>
-            <tr>
-                <td><input required placeholder='Password' type="password" name="password2" /></td>
-                <td><label>Cofirm password: </label></td>
-            </tr>
-            <tr>
-                <td><input placeholder='Optional' type="email" name="email" /></td>
-                <td><label>E-mail: </label></td>
-            </tr>
-            <tr>
-                <td><input type="checkbox" name="public" /></td>
-                <td><label>Make public: </label></td>
-            </tr>
-            <tr>
-                <td><button className='btn' >Sign Up</button></td>
-            </tr>
-        </table>
-    </form>
-</>);}
+    return(
+        <form onSubmit={Submit}>
+            {waitModal && <div className='modal wait' />}
+            <h3>Sign Up</h3>
+            <table>
+                <tr>
+                    <td><label>Name: </label></td>
+                    <td><input required placeholder='Name' type="text" name="name" /></td>
+                </tr>
+                <tr>
+                    <td><label>Password: </label></td>
+                    <td><input required placeholder='Password' type="password" name="password" /></td>
+                </tr>
+                <tr>
+                    <td><label>Cofirm password: </label></td>
+                    <td><input required placeholder='Password' type="password" name="password2" /></td>
+                </tr>
+                <tr>
+                    <td><label>E-mail: </label></td>
+                    <td><input placeholder='Optional' type="email" name="email" /></td>
+                </tr>
+                <tr>
+                    <td><label>Make public: </label></td>
+                    <td><input type="checkbox" name="public" /></td>
+                </tr>
+                <tr><td></td>
+                    <td><button className='btn' >Sign Up</button></td>
+                </tr>
+            </table>
+        </form>
+    )
+;}
 
-export const LogIn = (props)=>{
+const LogIn = ({setLoggedIn})=>{
+
+    const [waitModal, setWaitModal] = useState(false);
 
     const Submit = async(event)=>{
         event.preventDefault();
-        props.modal(true);
+        setWaitModal(true);
         const form = event.target;
         var cargaUtil = {
             'name' : form[0].value,
@@ -83,32 +93,95 @@ export const LogIn = (props)=>{
                 body: JSON.stringify(cargaUtil)
             });
             const res = await respuesta.json();
-            if(!res.err)
-                alert(JSON.stringify(res));
+            if(!res.err && res.suc)
+                setLoggedIn(true);
             else
                 alert('Error: ' + res.err);
         }catch(e){
             console.log(e);
         }
-        props.modal(false);
+        setWaitModal(false);
     }
 
     return(
         <form onSubmit={Submit}>
+            {waitModal && <div className='modal wait' />}
             <h3>Log In</h3>
                 <table>
                 <tr>
-                    <td><input required placeholder='Name' type="text" /></td>
                     <td><label>Name: </label></td>
+                    <td><input required placeholder='Name' type="text" /></td>
                 </tr>
                 <tr>
-                    <td><input required placeholder='Password' type="password" /></td>
                     <td><label>Password: </label></td>
+                    <td><input required placeholder='Password' type="password" /></td>
                 </tr>
                 <tr>
-                    <td><button className='btn' >Log In</button></td>
+                    <td></td><td><button className='btn' >Log In</button></td>
                 </tr>
             </table>
         </form>
     );
+}
+
+const Upload = ()=>{
+    return(
+        <div className='card w' >
+
+        </div>
+    );
+}
+
+export const SessionPanel = ()=>{
+
+    const [loggedIn, setLoggedIn] = useState(false);
+
+    return(<>
+        {loggedIn ? <Upload /> : <>
+            <div className='card' >
+                <LogIn setLoggedIn={setLoggedIn} />
+            </div>
+            <div className='card' >
+                <SignUp setLoggedIn={setLoggedIn} />
+            </div>
+        </>}
+    </>)
+}
+
+export const QuerryPanel = ()=>{
+
+    const [rows, setRows] = useState({});
+
+    const querry = async()=>{
+        const cargaUtil = {
+            cols: ['name', 'email'],
+            condition: 'name',
+            value: '*'
+        }
+        try{
+            const url= 'https://devpage-ojxi.onrender.com/get';
+            const respuesta = await fetch(url, {
+                method: "POST",
+                body: JSON.stringify(cargaUtil)
+            });
+            const res = await respuesta.json();
+            if(!res.err)
+                setRows(res.rows);
+            else
+                alert('Error: ' + res.err);
+        }catch(e){
+            console.log(e);
+        }
+    }
+    
+    useEffect(()=>{
+        querry();
+    }, [])
+
+    return(<table>
+        <thead>Search the database</thead>
+        <tbody>
+            {}
+        </tbody>
+    </table>);
 }

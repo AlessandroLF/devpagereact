@@ -214,11 +214,10 @@ form tr{
   margin: 3px;
   display: flex;
   justify-content: space-between;
-  justify-items: right;
-  align-items: center;
   text-align: left;
+  align-items: center;
   width: 100%;
-  flex-direction: row-reverse;
+  flex-direction: row;
 }
 
 form .btn{
@@ -233,6 +232,8 @@ input{
   margin: .1rem;
   padding: .2rem;
   height: fit-content;
+  width: 50vw;
+  max-width: 350px;
 }
 
 input[type='checkbox']{
@@ -308,7 +309,7 @@ td img{
 
 @media (max-width: 500px){
   form tr{
-    flex-direction: column-reverse;
+    flex-direction: column;
   }
 
   tr{

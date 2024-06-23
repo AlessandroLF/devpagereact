@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import glogo from '../Git-Icon-Black.png';
-import { SignUp, LogIn } from './dbconection';
+import {SessionPanel, QuerryPanel} from './dbconection';
 
 export const Experience = ()=>{
 
@@ -63,9 +63,7 @@ export const Experience = ()=>{
 
 export const Bd = ()=>{
 
-    const [waitModal, setWaitModal] = useState(false);
-
-    const oncSearchClick = (event)=>{
+    const onSearchClick = (event)=>{
         event.target.parentElement.classList.toggle('off');
     }
 
@@ -76,22 +74,15 @@ export const Bd = ()=>{
     return(
         <div className='panel' >
             <div className='card w off' >
-                <div className='header' onClick={oncSearchClick}>
+                <div className='header' onClick={onSearchClick}>
                     <img src="https://cdn-icons-png.flaticon.com/512/6703/6703157.png" alt='Search' onClick={secClick} />
                     <label onClick={secClick} >____</label>
                 </div>
                 <div className='content'>
-                    <h1>DB Querry here</h1>
+                    <QuerryPanel />
                 </div>
             </div>
-            <div className='card'>
-                {waitModal && <div className='modal wait' />}
-                <LogIn modal={setWaitModal} />
-            </div>
-            <div className='card'>
-                {waitModal && <div className='modal wait' />}
-                <SignUp modal={setWaitModal} />
-            </div>
+            <SessionPanel />
         </div>
     );
 }
