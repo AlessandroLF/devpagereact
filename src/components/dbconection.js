@@ -152,7 +152,7 @@ export const SessionPanel = ()=>{
 
 export const QuerryPanel = ()=>{
 
-    const [waitModal, setWaitModal] = useState(false);
+    const [waitModal, setWaitModal] = useState(true);
     const [rows, setRows] = useState([]);
     const [cols, setCols] = useState(['id','name', 'email', 'date']);
 
@@ -176,16 +176,18 @@ export const QuerryPanel = ()=>{
         }catch(e){
             console.log(e);
         }
+        setWaitModal(false);
     }
     
     useEffect(()=>{
         querry();
-    }, [])
+    })
 
     return(<div className='db' >
         <table>
             <thead>
             <tr>
+                <td><div className="btn" >+</div></td>
                 {cols.map((col)=>(
                     <td>{col}</td>
                 ))}
@@ -195,6 +197,7 @@ export const QuerryPanel = ()=>{
                 {waitModal && <div className='modal wait' ><img src="https://cdn.pixabay.com/animation/2023/10/08/03/19/03-19-26-213_512.gif" alt="Loading..." /></div>}
                 {rows.map((row)=>(
                     <tr>
+                        <tr></tr>
                         {cols.map((col)=>(
                             <td>{row[col]}</td>
                         ))}
