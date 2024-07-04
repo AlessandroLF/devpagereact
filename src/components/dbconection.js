@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
 const SignUp = ({setLoggedIn, setWaitModal})=>{
 
@@ -153,13 +153,16 @@ export const SessionPanel = ()=>{
 export const QuerryPanel = ()=>{
 
     const [waitModal, setWaitModal] = useState(true);
+    const [dropDownModal, setDropDownModal] = useState(false);
     const [rows, setRows] = useState([]);
-    const [cols, setCols] = useState(['id','name', 'email', 'date']);
+    const [colsOn, setColsOn] = useState(['id','name', 'email', 'date']);
+    const [colsOf, setColsOf] = useState([]);
+    const dropDownRef = useRef(null);
 
 
     const querry = async()=>{
         const cargaUtil = {
-            cols: cols
+            cols: colsOn
         }
         try{
             const url= 'https://devpage-ojxi.onrender.com/get';
@@ -178,17 +181,55 @@ export const QuerryPanel = ()=>{
         }
         setWaitModal(false);
     }
+
+    const listItemClick = (event)=>{
+        setDropDownModal(false);
+        let selected = event.target.textContent;
+        if(colsOn.includes(selected)){
+            setColsOn(colsOn.filter(option => option !== selected))
+            setColsOf([...colsOf, selected]);
+        }else{
+            setColsOf(colsOf.filter(option => option !== selected))
+            setColsOn([...colsOn, selected]);
+        }
+        
+    }
     
     useEffect(()=>{
+        const outsideClick = (event)=>{
+            if(dropDownRef.current && !dropDownRef.current.contains(event.target))
+                setDropDownModal(false);
+        }
+
+        document.addEventListener('mousedown', outsideClick);
+
         querry();
-    })
+
+        return ()=>{
+            document.removeEventListener('mousedown', outsideClick);
+        }
+    }, [])
 
     return(<div className='db' >
         <table>
             <thead>
             <tr>
-                <td><div className="btn" >+</div></td>
-                {cols.map((col)=>(
+                <td>
+                    {dropDownModal && <ul class="dropdown modal" onBlur={()=>{setDropDownModal(false)}} ref={dropDownRef} >
+                        {colsOf.map(col =>(
+                            <li onClick={listItemClick} >
+                                {col}
+                            </li>
+                        ))}
+                        {colsOn.map(col =>(
+                            <li className="on" onClick={listItemClick} >
+                                {col}
+                            </li>
+                        ))}
+                    </ul>}
+                        <div className="btn" onClick={()=>{setDropDownModal(true)}} >+</div>
+                </td>
+                {colsOn.map((col)=>(
                     <td>{col}</td>
                 ))}
             </tr>
@@ -198,7 +239,7 @@ export const QuerryPanel = ()=>{
                 {rows.map((row)=>(
                     <tr>
                         <tr></tr>
-                        {cols.map((col)=>(
+                        {colsOn.map((col)=>(
                             <td>{row[col]}</td>
                         ))}
                     </tr>

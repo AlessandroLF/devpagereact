@@ -122,6 +122,7 @@ tr .btn:hover{
   box-shadow: -15px 15px 20px black;
   padding-bottom: 5vh;
   margin-bottom: 5vh;
+  padding-right: 3vw;
 }
 
 .card{
@@ -196,6 +197,35 @@ tr .btn:hover{
   width: 90%;
 }
 
+.modal.wait{
+  position:absolute;
+  left: 0;
+  background-color: rgba(255, 255, 255, 0.7);
+  width: 100%;
+  height: 100%;
+  z-index: 11;
+  cursor: wait;
+}
+
+.modal .btn.close{
+  top:10vh;
+  right: 10vw;
+  width: 45px;
+  height: 45px;
+}
+
+.modal.dropdown{
+  text-transform: capitalize;
+  background-color: aliceblue;
+  width: fit-content;
+  height: fit-content;
+  position: absolute;
+  top: -100%;
+  left: 150%;
+  box-shadow: -7px 7px 7px rgb(0, 0, 0);
+  padding-left: 0;
+}
+
 .btn.close:hover{
   color: rgb(0, 0, 0);
   background-color: rgb(45, 42, 236);
@@ -203,6 +233,7 @@ tr .btn:hover{
 
 tr .btn{
   padding: 0;
+  overflow-y: visible;
 }
 
 tr .btn:hover{
@@ -228,13 +259,6 @@ border: none;
   max-width: fit-content;
 }
 
-.modal .btn.close{
-  top:10vh;
-  right: 10vw;
-  width: 45px;
-  height: 45px;
-}
-
 form tr{
   margin: 3px;
   display: flex;
@@ -250,7 +274,7 @@ form .btn{
   border-color: transparent;
 }
 
-input{
+form input{
   font-size: calc(10px + 2vmin);;
   border-style: groove;
   border-radius: .5rem;
@@ -318,19 +342,10 @@ td img{
   -webkit-user-drag: none;
 }
 
-.modal.wait{
-  position:absolute;
-  left: 0;
-  background-color: rgba(255, 255, 255, 0.7);
-  width: 100%;
-  height: 100%;
-  z-index: 11;
-  cursor: wait;
-}
-
 .card.w div.db{
   overflow-x: auto;
   justify-content: center;
+  overflow: visible;
 }
 
 .db table{
@@ -344,7 +359,7 @@ td img{
 
 .db table td{
   border: 2px solid black;
-  font-size: 2vw;
+  font-size: 2.2vmin;
 }
 
 ::-webkit-scrollbar{
@@ -369,7 +384,41 @@ td img{
 
 thead{
   background-color: rgba(0, 0, 0 ,.3);
+  text-transform: capitalize;
 }
+
+td{
+  position: relative;
+}
+
+ul{
+  display: flex;
+  flex-direction: column;
+  list-style-type: none;
+  margin: 0;
+}
+
+li{
+  padding: 0 5px 0 5px;
+  cursor: pointer;
+  font-size: calc(13px + .3em);
+}
+
+li.on{
+  background-color: red;
+  color: white;
+}
+
+li.on:hover{
+  background-color: white;
+  color: red;
+}
+
+li:hover{
+  background-color: rgb(117, 184, 117);
+  color: rgb(250, 185, 5);
+}
+
 
 @media (min-width: 1200px){
   .card{
