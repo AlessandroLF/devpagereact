@@ -88,8 +88,11 @@ const LogIn = ({setLoggedIn, setWaitModal})=>{
                 body: JSON.stringify(cargaUtil)
             });
             const res = await respuesta.json();
-            if(!res.err && res.suc)
+            if(!res.err && res.suc){
+                sessionStorage.setItem('uname', form[0].value);
+                sessionStorage.setItem('password', form[1].value);
                 setLoggedIn(true);
+            }
             else
                 alert('Error: ' + res.err);
         }catch(e){
@@ -120,7 +123,64 @@ const LogIn = ({setLoggedIn, setWaitModal})=>{
 
 const Upload = ({setLoggedIn})=>{
 
-    const {userQuote, setUserquote} = useState([]);
+    const [userQuotes, setUserquotes] = useState([]);
+    const [waitModal, setWaitModal] = useState(false);
+
+    const getQuotes = async()=>{
+        setWaitModal(true);
+        const cargaUtil = {
+            'name' : sessionStorage.getItem('uname'),
+            'password': sessionStorage.getItem('password')
+        }
+        try{
+            const url= 'https://devpage-ojxi.onrender.com/getQuotes';
+            const respuesta = await fetch(url, {
+                method: "POST",
+                body: JSON.stringify(cargaUtil)
+            });
+            const res = await respuesta.json();
+            if(!res.err){
+                console.log(res);
+                setUserquotes(res.rows);
+            }else
+                alert('Error: ' + res.err);
+        }catch(e){
+            console.log(e);
+        }
+        setWaitModal(false);
+    }
+
+    const onSubmit = async(event)=>{
+        event.preventDefault();
+        setWaitModal(true);
+        const form = event.target;
+        if(form[1].value.length > 5){
+            if(sessionStorage.getItem('uname')){
+                var cargaUtil = {
+                    'name' : sessionStorage.getItem('uname'),
+                    'password': sessionStorage.getItem('password'),
+                    'quote': form[0].value
+                };
+                const url= 'https://devpage-ojxi.onrender.com/saveQuote';
+    
+                const respuesta = await fetch(url, {
+                    method: "POST",
+                    body: JSON.stringify(cargaUtil)
+                });
+                const res = await respuesta.json();
+                if(!res.err){
+                    alert('Success!');
+                    setUserquotes(res.rows)
+                }
+                else{
+                    alert('Error :' + res.err);
+                }
+            }
+        }else{
+            alert('Quote must be at least 6 characters');
+        }
+        setWaitModal(false);
+    }
 
     const logOff = ()=>{
         setLoggedIn(false);
@@ -128,7 +188,19 @@ const Upload = ({setLoggedIn})=>{
 
     return(
         <div className='card w' >
-            <div className='btn close' onClick={logOff} >LogOut</div>
+            <div >
+                <div>Hello {sessionStorage.getItem('uname')}! </div>
+                <div className='btn close' onClick={logOff} >LogOut</div>
+            </div>
+            My quotes:
+            <table>
+                {userQuotes.map(quote=>(
+                    <tr>
+                        <td>{quote}</td>
+                    </tr>
+                ))}
+            </table>
+            {waitModal && <div className='modal wait' ><img src="https://cdn.pixabay.com/animation/2023/10/08/03/19/03-19-26-213_512.gif" alt="Loading..." /></div>}
             <form onSubmit={onSubmit} >
                 <h3>Save a qoute to your profile</h3>
                 <table>
@@ -176,6 +248,7 @@ export const QuerryPanel = ()=>{
 
 
     const querry = async()=>{
+        setWaitModal(true);
         const cargaUtil = {
             cols: colsOn
         }
@@ -207,7 +280,6 @@ export const QuerryPanel = ()=>{
             setColsOf(colsOf.filter(option => option !== selected))
             setColsOn([...colsOn, selected]);
         }
-        
     }
     
     useEffect(()=>{
@@ -223,11 +295,11 @@ export const QuerryPanel = ()=>{
         return ()=>{
             document.removeEventListener('mousedown', outsideClick);
         }
-    }, [])
+    }, [colsOf, colsOn])
 
     return(<div className='db' >
-        <table>
             {waitModal && <div className='modal wait' ><img src="https://cdn.pixabay.com/animation/2023/10/08/03/19/03-19-26-213_512.gif" alt="Loading..." /></div>}
+        <table>
             <thead>
             <tr>
                 <td>
