@@ -243,7 +243,7 @@ export const QuerryPanel = ()=>{
     const [dropDownModal, setDropDownModal] = useState(false);
     const [rows, setRows] = useState([]);
     const [colsOn, setColsOn] = useState(['id','name', 'email' ]);
-    const [colsOf, setColsOf] = useState(['date']);
+    const [colsOf, setColsOf] = useState(['date', 'quote']);
     const dropDownRef = useRef(null);
 
 
@@ -298,12 +298,12 @@ export const QuerryPanel = ()=>{
     }, [colsOf, colsOn])
 
     return(<div className='db' >
-            {waitModal && <div className='modal wait' ><img src="https://cdn.pixabay.com/animation/2023/10/08/03/19/03-19-26-213_512.gif" alt="Loading..." /></div>}
         <table>
+        {waitModal ? <div className='modal wait' ><img src="https://cdn.pixabay.com/animation/2023/10/08/03/19/03-19-26-213_512.gif" alt="Loading..." /></div> : <>
             <thead>
             <tr>
                 <td>
-                    {dropDownModal && <ul class="dropdown modal" onBlur={()=>{setDropDownModal(false)}} ref={dropDownRef} >
+                    {dropDownModal && <ul class="dropdown modal" ref={dropDownRef} >
                         {colsOf.map(col =>(
                             <li onClick={listItemClick} >
                                 {col}
@@ -331,7 +331,7 @@ export const QuerryPanel = ()=>{
                         ))}
                     </tr>
                 ))}
-            </tbody>
+            </tbody></>}
         </table>
     </div>);
 }
