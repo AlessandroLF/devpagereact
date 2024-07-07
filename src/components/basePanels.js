@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import glogo from '../Git-Icon-Black.png';
 import {SessionPanel, QuerryPanel} from './dbconection';
 
@@ -71,6 +71,8 @@ export const Bd = ()=>{
         event.target.parentElement.click();
     }
 
+    const [loggedIn, setLoggedIn] = useState(false);
+
     return(
         <div className='panel' >
             <div className='card w off' >
@@ -79,10 +81,10 @@ export const Bd = ()=>{
                     <label onClick={secClick} >____</label>
                 </div>
                 <div className='content'>
-                    <QuerryPanel />
+                    <QuerryPanel loggedIn={loggedIn} />
                 </div>
             </div>
-            <SessionPanel />
+            <SessionPanel loggedIn={loggedIn} setLoggedIn={setLoggedIn} />
         </div>
     );
 }

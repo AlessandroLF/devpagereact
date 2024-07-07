@@ -24,6 +24,8 @@ const SignUp = ({setLoggedIn, setWaitModal})=>{
                 const res = await respuesta.json();
                 if(!res.err){
                     alert('Success!');
+                    sessionStorage.setItem('uname', form[0].value)
+                    sessionStorage.setItem('password', form[1].value)
                     setLoggedIn(true);
                 }
                 else{
@@ -154,7 +156,7 @@ const Upload = ({setLoggedIn})=>{
         event.preventDefault();
         setWaitModal(true);
         const form = event.target;
-        if(form[1].value.length > 5){
+        if(form[0].value.length > 5){
             if(sessionStorage.getItem('uname')){
                 var cargaUtil = {
                     'name' : sessionStorage.getItem('uname'),
@@ -183,6 +185,8 @@ const Upload = ({setLoggedIn})=>{
     }
 
     const logOff = ()=>{
+        sessionStorage.removeItem('uname');
+        sessionStorage.removeItem('password');
         setLoggedIn(false);
     }
 
@@ -218,10 +222,9 @@ const Upload = ({setLoggedIn})=>{
     );
 }
 
-export const SessionPanel = ()=>{
+export const SessionPanel = ({loggedIn, setLoggedIn})=>{
         
     const [waitModal, setWaitModal] = useState(false);
-    const [loggedIn, setLoggedIn] = useState(false);
 
     return(<>
         {loggedIn ? <Upload setLoggedIn={setLoggedIn} /> : <>
@@ -237,7 +240,7 @@ export const SessionPanel = ()=>{
     </>)
 }
 
-export const QuerryPanel = ()=>{
+export const QuerryPanel = (loggedIn)=>{
 
     const [waitModal, setWaitModal] = useState(true);
     const [dropDownModal, setDropDownModal] = useState(false);
@@ -295,7 +298,7 @@ export const QuerryPanel = ()=>{
         return ()=>{
             document.removeEventListener('mousedown', outsideClick);
         }
-    }, [colsOf, colsOn])
+    }, [colsOf, colsOn, loggedIn])
 
     return(<div className='db' >
         <table>
