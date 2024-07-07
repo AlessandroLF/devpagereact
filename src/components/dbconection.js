@@ -224,9 +224,9 @@ const Upload = ({setLoggedIn})=>{
             </div>
             My quotes:
             <table>
-                {userQuotes.map(quote=>(
+                {userQuotes.map(row=>(
                     <tr>
-                        <td>{quote}</td>
+                        <td>{row.quote}</td>
                     </tr>
                 ))}
             </table>
