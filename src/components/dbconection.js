@@ -195,6 +195,7 @@ const Upload = ({setLoggedIn})=>{
         }else{
             alert('Quote must be at least 6 characters');
         }
+        getQuotes();
         setWaitModal(false);
     }
 
@@ -203,6 +204,8 @@ const Upload = ({setLoggedIn})=>{
         sessionStorage.removeItem('password');
         setLoggedIn(false);
     }
+
+    useEffect(()=>{getQuotes()}, [])
 
     return(
         <div className='card w' >
