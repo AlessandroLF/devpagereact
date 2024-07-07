@@ -120,13 +120,28 @@ const LogIn = ({setLoggedIn, setWaitModal})=>{
 
 const Upload = ({setLoggedIn})=>{
 
-    const onSubmit = ()=>{
+    const {userQuote, setUserquote} = useState([]);
+
+    const logOff = ()=>{
         setLoggedIn(false);
     }
 
     return(
         <div className='card w' >
-            <div className='btn close' onClick={onSubmit} >LogOut</div>
+            <div className='btn close' onClick={logOff} >LogOut</div>
+            <form onSubmit={onSubmit} >
+                <h3>Save a qoute to your profile</h3>
+                <table>
+                    <tr>
+                        <td><label>Quote to save: </label></td>
+                        <td><input required placeholder='Quote' type="text" name="quote" ></input></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td><button className='btn' >Upload</button></td>
+                    </tr>
+                </table>
+            </form>
         </div>
     );
 }
@@ -155,8 +170,8 @@ export const QuerryPanel = ()=>{
     const [waitModal, setWaitModal] = useState(true);
     const [dropDownModal, setDropDownModal] = useState(false);
     const [rows, setRows] = useState([]);
-    const [colsOn, setColsOn] = useState(['id','name', 'email', 'date']);
-    const [colsOf, setColsOf] = useState([]);
+    const [colsOn, setColsOn] = useState(['id','name', 'email' ]);
+    const [colsOf, setColsOf] = useState(['date']);
     const dropDownRef = useRef(null);
 
 
@@ -212,6 +227,7 @@ export const QuerryPanel = ()=>{
 
     return(<div className='db' >
         <table>
+            {waitModal && <div className='modal wait' ><img src="https://cdn.pixabay.com/animation/2023/10/08/03/19/03-19-26-213_512.gif" alt="Loading..." /></div>}
             <thead>
             <tr>
                 <td>
@@ -235,7 +251,6 @@ export const QuerryPanel = ()=>{
             </tr>
             </thead>
             <tbody>
-                {waitModal && <div className='modal wait' ><img src="https://cdn.pixabay.com/animation/2023/10/08/03/19/03-19-26-213_512.gif" alt="Loading..." /></div>}
                 {rows.map((row)=>(
                     <tr>
                         <tr></tr>
