@@ -103,6 +103,20 @@ const LogIn = ({setLoggedIn, setWaitModal})=>{
         setWaitModal(false);
     }
 
+    useEffect(()=>{
+        if(sessionStorage.getItem('unmame')){
+            const event = {
+                target: [
+                    {value: sessionStorage.getItem('uname')},
+                    {value: sessionStorage.getItem('password')}
+                ]
+            }
+            Submit(event);
+        }else{
+            console.log('No session');
+        }
+    },[])
+
     return(
         <form onSubmit={Submit}>
             <h3>Log In</h3>
