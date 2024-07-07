@@ -143,27 +143,34 @@ const Upload = ({setLoggedIn})=>{
     const [waitModal, setWaitModal] = useState(false);
 
     const getQuotes = async()=>{
+
         setWaitModal(true);
-        const cargaUtil = {
-            'name' : sessionStorage.getItem('uname'),
-            'password': sessionStorage.getItem('password')
+
+        if(sessionStorage.getItem('uname')){
+            const cargaUtil = {
+                'name' : sessionStorage.getItem('uname'),
+                'password': sessionStorage.getItem('password')
+            }
+            try{
+                const url= 'https://devpage-ojxi.onrender.com/getQuotes';
+                const respuesta = await fetch(url, {
+                    method: "POST",
+                    body: JSON.stringify(cargaUtil)
+                });
+                const res = await respuesta.json();
+                if(!res.err){
+                    console.log(res);
+                    setUserquotes(res.rows);
+                }else
+                    alert('Error: ' + res.err);
+            }catch(e){
+                console.log(e);
+            }
+            setWaitModal(false);
+        }else{
+            alert('Please logIn');
+            setLoggedIn(false);
         }
-        try{
-            const url= 'https://devpage-ojxi.onrender.com/getQuotes';
-            const respuesta = await fetch(url, {
-                method: "POST",
-                body: JSON.stringify(cargaUtil)
-            });
-            const res = await respuesta.json();
-            if(!res.err){
-                console.log(res);
-                setUserquotes(res.rows);
-            }else
-                alert('Error: ' + res.err);
-        }catch(e){
-            console.log(e);
-        }
-        setWaitModal(false);
     }
 
     const onSubmit = async(event)=>{
@@ -205,7 +212,9 @@ const Upload = ({setLoggedIn})=>{
         setLoggedIn(false);
     }
 
-    useEffect(()=>{getQuotes()}, [])
+    useEffect(()=>{
+        getQuotes();
+    }, [])
 
     return(
         <div className='card w' >
